@@ -8,7 +8,7 @@ window.PORTFOLIO_PROJECTS = [
       "A Django RAG workspace for asking questions over uploaded documents with answer citations tied back to source documents, chunks, pages, and match scores.",
     card:
       "Document Q&A workspace with retrieval, citations, streaming chat, feedback review, and RAG evaluation.",
-    cover: "assets/cited/dashboard-baseline.jpg",
+    cover: "assets/cited/dashboard.png",
     images: [
       {
         src: "assets/cited/chat-citations.png",
@@ -60,7 +60,7 @@ window.PORTFOLIO_PROJECTS = [
       "A safer AI assistant for ecommerce support teams where model output becomes reviewed drafts and sensitive customer-impacting actions move through approval flows.",
     card:
       "AI support workspace for ticket triage, grounded reply drafting, PII redaction, approvals, and audits.",
-    cover: "assets/support/dashboard-baseline.jpg",
+    cover: "assets/support/dashboard.png",
     coverPanel: {
       title: "Support Ops",
       items: ["Ticket triage", "PII redaction", "Lead approvals"],
@@ -116,7 +116,7 @@ window.PORTFOLIO_PROJECTS = [
       "A document AI system for extracting structured data from PDFs and images, validating fields, routing uncertainty to humans, and exporting corrected results.",
     card:
       "PDF/image extraction, schema validation, review queues, cited document chat, exports, and evaluation.",
-    cover: "assets/document/dashboard-baseline.jpg",
+    cover: "assets/document/dashboard.png",
     images: [
       {
         src: "assets/document/document-detail.png",

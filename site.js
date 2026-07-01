@@ -22,25 +22,56 @@ function renderProjectCards(targetSelector, limit) {
       (project) => `
         <article class="project-card">
           <a class="project-card-link" href="${projectUrl(project.slug)}" aria-label="Open ${project.title} project page">
-            ${
-              project.coverPanel
-                ? `<div class="project-visual-panel">
-                    <strong>${project.coverPanel.title}</strong>
-                    ${project.coverPanel.items.map((item) => `<span>${item}</span>`).join("")}
-                  </div>`
-                : `<img src="${project.cover}" alt="${project.title} screenshot" loading="eager" decoding="sync" />`
-            }
-            <div>
+            <div class="project-poster">
+              <img src="${project.cover}" alt="${project.title} screenshot" loading="eager" decoding="sync" />
+              <span>${project.type}</span>
+            </div>
+            <div class="project-card-body">
               <p class="project-type">${project.type}</p>
               <h3>${project.title}</h3>
               <p>${project.card}</p>
-              <span class="text-link">Open project page</span>
             </div>
           </a>
         </article>
       `
     )
     .join("");
+}
+
+function bindContactForm() {
+  const form = document.querySelector("[data-contact-form]");
+  if (!form) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submitButton = form.querySelector("button[type='submit']");
+    const originalLabel = submitButton?.textContent;
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      window.location.href = new URL("index.html", window.location.href).href;
+    } catch (error) {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
+      form.submit();
+    }
+  });
 }
 
 function renderProjectDetail() {
@@ -122,3 +153,4 @@ function renderProjectDetail() {
 renderProjectCards("[data-project-cards]");
 renderProjectCards("[data-home-projects]", 3);
 renderProjectDetail();
+bindContactForm();
